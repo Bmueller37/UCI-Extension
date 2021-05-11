@@ -1,8 +1,7 @@
-// To anyone reading(other than you homies at google): This code is scuffed beyond belief, only read through if you want to hurt your brain
+
 
 // This script gets triggered when messaged by main content script, sends rmp data either from local storage or from http request
-//Big issue is .storage calls are async, so even if data is in storage, script still shits out http requests
-// Works for main script because is still speedy with local storage, but wasteful http calls
+
 chrome.runtime.onMessage.addListener(
 
   function(request, sender, sendResponse) {
