@@ -28,19 +28,19 @@ chrome.runtime.onMessage.addListener(
 		
 		var profData;
 		var profName = request.profName;
-		var profURL = 'https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=University+of+California+Irvine&schoolID=1074&query=' + profName;
-		
+		var profURL = 'https://www.ratemyprofessors.com/search/teachers?query=' + profName + "&sid=U2Nob29sLTEwNzQ=";
+		//console.log(profURL);
 		fetch(profURL).then(r => r.text()).then(result => { 
 		
 		
 		var parser = new DOMParser();
 		var doc = parser.parseFromString(result, 'text/html');
-		var RMPList = doc.getElementsByClassName("main");
-		
+		var root = doc.getElementById("root");
+		var RMPList = root.firstChild.firstChild.childNodes[3].childNodes;
+		console.log(profURL);
+		console.info(doc);
 		if (RMPList.length == 0) {
 			 throw new Error('error');
-			
-			
 		}
 		
 		var profID;
@@ -49,15 +49,15 @@ chrome.runtime.onMessage.addListener(
 			//console.log(RMPList[i].innerText.replace(/\s/g, '').toLowerCase());
 			//console.log(request.profFName.replace(/\s/g, '').toLowerCase());
 			if (RMPList[i].innerText.toLowerCase().replace(/\s/g, '').startsWith(request.profFName.replace(/\s/g, '').toLowerCase())) {
-				profID = RMPList[i].parentNode.parentNode.href;
+				profID = RMPList[i].parentElement.parentElement.parentElement.href;
 				profID = String(profID);
 				//console.log(request.profName);
 			}
 			
 			
 		}
-		profID = profID.split("=")[1];
-		
+		//profID = profID.split("=")[1];
+		console.log(profID);
 	
 		var rmpURL = "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=" + profID;
 		fetch(rmpURL).then(x => x.text()).then(output => {

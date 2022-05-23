@@ -1,7 +1,7 @@
 {
 "name":"UCI GPA AND RMP",
 "description":"See all GPA's and Rate My Professor Details on the UCI Schedule of Courses Website",
-"version":"1.13",
+"version":"2.1",
 "manifest_version":2,
 "permissions": [
 		"storage"

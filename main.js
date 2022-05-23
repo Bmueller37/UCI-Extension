@@ -118,20 +118,20 @@ function addNewHeaders() {
 		var overallCourse = document.createElement("th");
 		overallCourse.textContent = "Course GPA Overall";
 
-		var rmpRating = document.createElement("th");
-		rmpRating.textContent = "RateMyProfessor Rating";
+		//var rmpRating = document.createElement("th"); DEPRECATED
+		//rmpRating.textContent = "RateMyProfessor Rating";
 
 		var rmpLink = document.createElement("th");
 		rmpLink.textContent = "RateMyProfessor Link";
 
 		styleHeader(withProfessor);
 		styleHeader(overallCourse);
-		styleHeader(rmpRating);
+		//styleHeader(rmpRating);
 		styleHeader(rmpLink);
 		
 		nodeList[i].parentNode.append(withProfessor);
 		nodeList[i].parentNode.append(overallCourse);
-		nodeList[i].parentNode.append(rmpRating);
+		//nodeList[i].parentNode.append(rmpRating);
 		nodeList[i].parentNode.append(rmpLink);
 	}
 	
@@ -207,8 +207,14 @@ function addData(objList, dataset) {
 }
 function getRMPData(professorName, DOMelem) 
 {
-	var rating = createDataElement("#FFFFCC");
 	var link = document.createElement("a");
+	link.textContent = "Link";
+	var professor_name = professorName.split(" ")[0];
+	link.setAttribute('href', 'https://www.ratemyprofessors.com/search/teachers?query=' + professor_name + "&sid=U2Nob29sLTEwNzQ=");
+	link.setAttribute('target', '_blank');
+	DOMelem.append(link);
+	/*
+	var rating = createDataElement("#FFFFCC");
 	link.textContent = "Link";
 	var professor_name = professorName.split(" ")[0];
 	var msg = {profName: professor_name, profFName: professor_name};
@@ -221,6 +227,7 @@ function getRMPData(professorName, DOMelem)
 		DOMelem.append(rating);
 		DOMelem.append(link);
 	});
+	*/
 }
 
 
